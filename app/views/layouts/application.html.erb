@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TechpitJobs</title>
+    <%= csrf_meta_tags %>
+  	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- この一行を追加:viewportの設定 -->
+    <%= yield :ogp %><!-- この一行を追加 -->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" /><!-- 文字コードの指定-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"><!-- この一行を追加:font-awsomeの設定 -->
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <!-- ここから追加 -->
+  <nav class="navbar navbar-expand-lg bg-2 navbar-light header">
+    <div class="container">
+      <a class="navbar-brand" href="/jobs">Techpit Job</a>
+      <% if user_signed_in? %>
+      <div class="my-2 my-lg-0">
+          <%= link_to 'ログアウト', destroy_user_session_path, class: "no-text-decoration", method: :delete %><!-- link_toメソッドを使ってログアウト用のリンクを用意 -->
+        </div>
+      <% end %>
+    </div>
+  </nav>
+  <!-- ここまで -->
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <%= yield %>
+  <script>
+    $('.url-text').text(document.URL); //url-textクラスを現在のURL（document.URL）に変更する
+    function clipURL() { //clipURL関数の定義（urlをコピーする機能）
+      $('body').append('<textarea id="currentURL" style="position:fixed;left:-100%;">'+location.href+'</textarea>');//コピー用のtextareaを作成
+      $('#currentURL').select(); //currentURLのIDを選択
+      document.execCommand('copy'); //選択しているテキストをクリップボードにコピーする
+      $('#currentURL').remove(); //現在のcurrentURLのIDを削除
+      alert("URLをコピーしました。");//アラートを表示する
+    }
+    var text = $('.card-title').text(); //textにcard-titleクラスのテキストを代入する
+    var twitterurl = "https://twitter.com/intent/tweet?url=" + document.URL + "&text=" + text + "&hashtags=#テックピット";//twitterurlのシェア用urlを作成してtwitterurlに挿入
+    $('.btn-tw').attr('href',twitterurl);//btn-twクラスのリンクをtwitterurlに変更する
+  </script>
+</body>
+</html>
