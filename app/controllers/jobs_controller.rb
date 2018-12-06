@@ -26,10 +26,10 @@ class JobsController < ApplicationController
     image_url = cut_path(image_path) #不要なパスをcutする
     @job.image_url = image_url #@jobのimage_urlにcutしたimage_urlを代入
     if @job.save
-        flash[:notice] = "投稿が保存されました"
+        flash[:notice] = "チャレンジが保存されました"
         redirect_to @job
     else
-        flash[:alert] = "投稿に失敗しました"
+        flash[:alert] = "チャレンジに失敗しました"
     end
   end
 

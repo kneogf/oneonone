@@ -2,10 +2,10 @@ class EntriesController < ApplicationController
   def create
   	@entry = current_user.entries.new(entry_params)
   	if @entry.save
-        flash[:notice] = "応募完了しました"
-        redirect_to @entry.job, notice: "予約が完了しました。"
+        flash[:notice] = "チャレンジを送りましました"
+        redirect_to @entry.job, notice: "チャレンジが認められました。"
     else
-        flash[:alert] = "応募に失敗しました"
+        flash[:alert] = "チャレンジが認められませんでした"
         redirect_to :back
     end
   end
